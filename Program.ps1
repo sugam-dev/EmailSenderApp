@@ -4,6 +4,9 @@
 . "./Tools/Display.ps1"
 . "./Utilities/SpecialCharacters.ps1"
 
+# Load appsettings file
+$appSettings = Get-Content "appsettings.Development.json" | ConvertFrom-Json
+
 # Call Display-Title function to display the title
 Display-Title
 
