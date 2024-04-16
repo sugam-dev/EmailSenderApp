@@ -16,10 +16,10 @@ $Title = @"
 "@
 
 # Load appsettings.json file
-$appSettings = Get-Content "appsettings.json" | ConvertFrom-Json
+$appSettings = Get-Content "appsettings.Development.json" | ConvertFrom-Json
 
 # Retrieve connection string
-$connectionString = $appSettings.ConnectionStrings.Development
+$connectionString = $appSettings.ConnectionStrings.DefaultConnection
 
 # Attempt to establish database connection
 try {
@@ -43,13 +43,16 @@ Display-Separator
 
 # Call Display-ConnectionStatus function with connectionStatus as parameters
 Display-ConnectionStatus $connectionStatus
-
-# Call Display-EmailSettings function with email settings as parameters
-Display-EmailSettings -SmtpServer $emailSettings.SmtpServer `
-                      -SmtpPort $emailSettings.SmtpPort `
-                      -Username $emailSettings.Username `
-                      -Password $emailSettings.Password `
-                      -EnableSsl $emailSettings.EnableSsl
+    
+# Display email settings only in debug mode
+if ($DebugPreference -eq "Continue") {
+    # Call Display-EmailSettings function with email settings as parameters
+    Display-EmailSettings -SmtpServer $emailSettings.SmtpServer `
+                        -SmtpPort $emailSettings.SmtpPort `
+                        -Username $emailSettings.Username `
+                        -Password $emailSettings.Password `
+                        -EnableSsl $emailSettings.EnableSsl
+}
 
 # Call Display-Separator function to display the separator line
 Display-Separator
