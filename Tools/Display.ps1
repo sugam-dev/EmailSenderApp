@@ -59,7 +59,7 @@ function Display-EmailSettings {
         [string]$SmtpServer,
         [int]$SmtpPort,
         [string]$Username,
-        [string]$Password,
+        [SecureString]$Password,
         [bool]$EnableSsl
     )
 
