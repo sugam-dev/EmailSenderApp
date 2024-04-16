@@ -1,6 +1,7 @@
 ﻿# Load files
 . "./Data/Establish.ps1"
 . "./Data/Invoke.ps1"
+. "./Generate/Output.ps1"
 . "./Tools/Display.ps1"
 . "./Utilities/SpecialCharacters.ps1"
 
@@ -35,8 +36,9 @@ Display-Separator
 # Execute stored procedure '[CatalogueSP].[usp_UnlistedVendor_SELECT_ProductURL]'
 $resultDataSet = Invoke-StoredProcedureAsDataSet -storedProcedureName '[CatalogueSP].[usp_UnlistedVendor_SELECT_ProductURL]' -parameters $null
 
-# Call Display-Result function to display result
-Display-Result -dataSet $resultDataSet
+# Generate HTML output from stored procedure result for unlisted vendor product URLs.
+$htmlOutput = Output-UnlistedVendorProductURL -resultDataSet $resultDataSet `
+                                    -templatePath "./Templates/UnlistedVendorProductURL.html"
 
 # Prompt user to press a key before closing
 Write-Host "Press any key to exit..." -ForegroundColor Yellow

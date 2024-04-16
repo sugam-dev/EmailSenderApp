@@ -95,3 +95,13 @@ function Invoke-StoredProcedureAsDataSet {
         return $null
     }
 }
+
+# Function to Opens a file or launches an application associated with the specified file path.
+function Invoke-Item {
+    param (
+        [string]$Path
+    )
+
+    # Open the specified file or launch the associated application
+    Start-Process $Path
+}
